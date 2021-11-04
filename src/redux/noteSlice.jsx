@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 
+// async API call to add randomly delected notes
 export const getRandomNoteAsync = createAsyncThunk(
   'notes/getRandomNoteAsync',
   async () => {
@@ -28,10 +29,11 @@ export const noteSlice = createSlice({
       return state.filter((note) => note.id !== action.payload.id);
     },
   },
+  // reducer processes API return into a note object, adds to state
   extraReducers: {
     [getRandomNoteAsync.fulfilled]: (state, action) => {
       const note = {
-        id: nanoid,
+        id: nanoid(),
         title: action.payload.note.type,
         content: action.payload.note.activity,
       };
