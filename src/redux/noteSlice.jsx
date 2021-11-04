@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, nanoid } from '@reduxjs/toolkit';
 
 export const getRandomNoteAsync = createAsyncThunk(
   'notes/getRandomNoteAsync',
@@ -18,7 +18,7 @@ export const noteSlice = createSlice({
   reducers: {
     addNote: (state, action) => {
       const note = {
-        id: new Date(),
+        id: nanoid(),
         title: action.payload.title,
         content: action.payload.content,
       };
@@ -31,7 +31,7 @@ export const noteSlice = createSlice({
   extraReducers: {
     [getRandomNoteAsync.fulfilled]: (state, action) => {
       const note = {
-        id: new Date(),
+        id: nanoid,
         title: action.payload.note.type,
         content: action.payload.note.activity,
       };
