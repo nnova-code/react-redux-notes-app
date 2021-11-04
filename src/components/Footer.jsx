@@ -14,8 +14,8 @@ const Footer = () => {
         backgroundColor: '#f5f5f5',
       }}
     >
-      <div class='container'>
-        <span class='text-muted'>
+      <div className='container'>
+        <span className='text-muted'>
           'A Simple Notes App' by Elise.
           <br />
           Copyright ⓒ {year}
