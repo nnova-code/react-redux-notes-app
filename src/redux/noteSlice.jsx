@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 export const getRandomNoteAsync = createAsyncThunk(
   'notes/getRandomNoteAsync',
   async () => {
-    const response = await fetch('http://www.boredapi.com/api/activity');
+    const response = await fetch('https://www.boredapi.com/api/activity');
     if (response.ok) {
       const note = await response.json();
       return { note };
