@@ -1,4 +1,15 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+
+export const getRandomNoteAsync = createAsyncThunk(
+  'notes/getRandomNoteAsync', 
+  async () => {
+    const response = await fetch('http://www.boredapi.com/api/activity');
+    if (response.ok) {
+      const note = await response.json();
+      return { note };
+    }
+  }
+);
 
 export const noteSlice = createSlice ({
   name: 'notes',
@@ -21,6 +32,16 @@ export const noteSlice = createSlice ({
       return state.filter((note) => note.id !== action.payload.id);
     },
   },
+  extraReducers: {
+    [getRandomNoteAsync.fulfilled]: (state, action) => {
+      const note = {
+        id: new Date(),
+        title: action.payload.note.type,
+        content: action.payload.note.activity
+      };
+      state.push(note);
+    }
+  }
 });
 
 export const { addNote, deleteNote } = noteSlice.actions;
